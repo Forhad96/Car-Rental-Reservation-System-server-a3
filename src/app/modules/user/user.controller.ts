@@ -1,49 +1,44 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { UserServices } from './user.service';
+import { createUser } from './user.service';
 
-const createStudent = catchAsync(async (req, res) => {
-  const { password, student: studentData } = req.body;
-
-  const result = await UserServices.createStudentIntoDB(password, studentData);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Student is created successfully',
-    data: result,
-  });
-});
-
-const createFaculty = catchAsync(async (req, res) => {
-  const { password, faculty: facultyData } = req.body;
-
-  const result = await UserServices.createFacultyIntoDB(password, facultyData);
+const handleCreateUser = catchAsync(async (req, res) => {
+  // const { user: userData } = req.body;
+  const result = await createUser(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Faculty is created succesfully',
+    message: 'User is created successfully',
     data: result,
   });
 });
 
-const createAdmin = catchAsync(async (req, res) => {
-  const { password, admin: adminData } = req.body;
+// const createFaculty = catchAsync(async (req, res) => {
+//   const { password, faculty: facultyData } = req.body;
 
-  const result = await UserServices.createAdminIntoDB(password, adminData);
+//   const result = await UserServices.createFacultyIntoDB(password, facultyData);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Admin is created succesfully',
-    data: result,
-  });
-});
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Faculty is created succesfully',
+//     data: result,
+//   });
+// });
 
-export const UserControllers = {
-  createStudent,
-  createFaculty,
-  createAdmin,
-};
+// const createAdmin = catchAsync(async (req, res) => {
+//   const { password, admin: adminData } = req.body;
+
+//   const result = await UserServices.createAdminIntoDB(password, adminData);
+
+//   sendResponse(res, {
+//     statusCode: httpStatus.OK,
+//     success: true,
+//     message: 'Admin is created succesfully',
+//     data: result,
+//   });
+// });
+
+export { handleCreateUser };
