@@ -9,6 +9,6 @@
 ### Car api
 - [X] **Crate car (Only Admin can create)**
 - [X] **Get all cars**
-- [] **Update A Car (Only Accessible to the Admin)**
+- [X] **Update A Car (Only Accessible to the Admin)**
 - [] **Delete A Car (Only Accessible to the Admin)**
 - [] **Fix**

@@ -14,9 +14,14 @@ const updateSingleCar = async (carId:string , payload:TCar)=>{
     const result =await CarModel.findByIdAndUpdate(carId,payload,{upsert:true,new:true}) 
     return result
 }
+const deleteSingleCar = async (carId:string)=>{
+    const result =await CarModel.findByIdAndUpdate(carId,{isDeleted:true},{upsert:true,new:true}) 
+    return result
+}
 
 export {
     createCar,
     getAllCars,
-    updateSingleCar
+    updateSingleCar,
+    deleteSingleCar
 }
