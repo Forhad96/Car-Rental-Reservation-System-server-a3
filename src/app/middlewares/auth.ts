@@ -23,7 +23,6 @@ const auth = (...requiredRoles:TUserRoles[]) => {
       }
 
       const role = (decoded as JwtPayload).role
-
       if(requiredRoles && !requiredRoles.includes(role)){
         throw new AppError(httpStatus.NOT_FOUND, 'You are not authorized!');
       }

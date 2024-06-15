@@ -7,7 +7,7 @@ import { USER_ROLES } from './user.constant';
 
 const router = express.Router();
 
-router.post('/signup',auth(USER_ROLES.admin), validateRequest(zUserSchema), handleCreateUser);
+router.post('/signup', validateRequest(zUserSchema), handleCreateUser);
 router.post('/signin', validateRequest(zLoginSchema), handleSingInUser);
 
 router.get('/',auth(USER_ROLES.admin),handleGetAllUser)
