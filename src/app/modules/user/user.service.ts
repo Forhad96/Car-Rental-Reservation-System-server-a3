@@ -5,11 +5,40 @@ import config from '../../config';
 import AppError from '../../errors/AppError';
 import { UserModel } from './user.model';
 import { TUser } from './user.interface';
-
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 const createUser = async (payload: TUser) => {
+  const isExistsUser = await UserModel.findOne({ email: payload?.email });
+  if (isExistsUser) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User already exist');
+  }
   const result = await UserModel.create(payload);
   return result;
 };
+
+const userSingIn = async (payload: TUser) => {
+  const isExistsUser = await UserModel.findOne({ email: payload.email });
+  if (!isExistsUser) {
+    throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
+  }
+
+  const isPasswordMatched = bcrypt.compare(payload.password,isExistsUser.password)
+    if (!isPasswordMatched) {
+    throw new AppError(httpStatus.FORBIDDEN, "Password incorrect, please give correct password");
+  }
+
+  const jwtPayload = {
+    userId: isExistsUser?.email,
+    role:isExistsUser?.role,
+  };
+
+  const accessToken = jwt.sign(jwtPayload,config.jwt_access_secret as string,{ expiresIn: '1h' },
+  );
+
+
+  return {accessToken};
+};
+
 
 // const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 //   // create a user object
@@ -113,6 +142,4 @@ const createUser = async (payload: TUser) => {
 //   }
 // };
 
-export  {
-createUser
-};
+export { createUser, userSingIn };

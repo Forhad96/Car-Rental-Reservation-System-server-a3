@@ -1,10 +1,9 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createUser } from './user.service';
+import { createUser, userSingIn } from './user.service';
 
 const handleCreateUser = catchAsync(async (req, res) => {
-  // const { user: userData } = req.body;
   const result = await createUser(req.body);
 
   sendResponse(res, {
@@ -14,6 +13,27 @@ const handleCreateUser = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const handleSingInUser = catchAsync(async (req, res) => {
+  const result = await userSingIn(req.body);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User is created successfully',
+    data: result,
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
 
 // const createFaculty = catchAsync(async (req, res) => {
 //   const { password, faculty: facultyData } = req.body;
@@ -41,4 +61,4 @@ const handleCreateUser = catchAsync(async (req, res) => {
 //   });
 // });
 
-export { handleCreateUser };
+export { handleCreateUser, handleSingInUser };

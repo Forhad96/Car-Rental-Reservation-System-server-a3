@@ -1,0 +1,11 @@
+### user singIn api
+- [X] **create singIN routes,controller,service**
+- [] **check if the user exist is or not**
+- [] **if user exist then check password is matched or not**
+- [] **create a  jwt token**
+- [] **Fix**
+- [] **Fix**
+- [] **Fix**
+- [] **Fix**
+- [] **Fix**
+- [] **Fix**
