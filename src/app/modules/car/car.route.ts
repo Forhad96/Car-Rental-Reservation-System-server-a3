@@ -3,7 +3,7 @@ import validateRequest from '../../middlewares/validateRequest';
 import auth from '../../middlewares/auth';
 import { USER_ROLES } from '../user/user.constant';
 import { zCarSchema } from './car.validation';
-import { handleCreateCar } from './car.controller';
+import { handleCreateCar, handleGetAllCars } from './car.controller';
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.post(
   validateRequest(zCarSchema),
   handleCreateCar,
 );
-
+router.get('/',handleGetAllCars)
 // router.post('/signin', validateRequest(zLoginSchema), handleSingInUser);
 
 // router.get('/', auth(USER_ROLES.admin), handleGetAllUser);
