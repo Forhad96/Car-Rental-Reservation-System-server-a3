@@ -2,7 +2,11 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 import bcrypt from 'bcrypt';
 import config from '../../config';
-const userSchema = new Schema(
+import { TUser } from './user.interface';
+
+
+
+const userSchema = new Schema<TUser>(
   {
     name: {
       type: String,
