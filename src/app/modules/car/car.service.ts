@@ -10,9 +10,13 @@ const getAllCars = async()=>{
     return result
 }
 
-
+const updateSingleCar = async (carId:string , payload:TCar)=>{
+    const result =await CarModel.findByIdAndUpdate(carId,payload,{upsert:true,new:true}) 
+    return result
+}
 
 export {
     createCar,
-    getAllCars
+    getAllCars,
+    updateSingleCar
 }

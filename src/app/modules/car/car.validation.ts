@@ -12,5 +12,7 @@ const zCarSchema = z.object({
     isDeleted: z.boolean().default(false),
   }),
 });
-
-export { zCarSchema };
+const zCarUpdateSchema = z.object({
+  body: zCarSchema.shape.body.partial(),
+});
+export { zCarSchema,zCarUpdateSchema };
