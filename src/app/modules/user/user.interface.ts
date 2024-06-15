@@ -6,3 +6,6 @@ export interface TUser {
   phone: string;
   address: string;
 }
+
+
+export type TUserRoles = keyof typeof USER_ROLE;

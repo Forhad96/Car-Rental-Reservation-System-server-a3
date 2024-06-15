@@ -39,6 +39,11 @@ const userSingIn = async (payload: TUser) => {
   return {accessToken};
 };
 
+const getAllUsers = async () => {
+  const result = await UserModel.find()
+  return result;
+};
+
 
 // const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
 //   // create a user object
@@ -142,4 +147,4 @@ const userSingIn = async (payload: TUser) => {
 //   }
 // };
 
-export { createUser, userSingIn };
+export { createUser, userSingIn,getAllUsers };
