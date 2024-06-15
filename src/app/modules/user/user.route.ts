@@ -8,9 +8,9 @@ import { USER_ROLES } from './user.constant';
 const router = express.Router();
 
 router.post('/signup',auth(USER_ROLES.admin), validateRequest(zUserSchema), handleCreateUser);
-router.post('/signin', auth(), validateRequest(zLoginSchema), handleSingInUser);
+router.post('/signin', validateRequest(zLoginSchema), handleSingInUser);
 
-router.get('/',auth(USER_ROLES.user),handleGetAllUser)
+router.get('/',auth(USER_ROLES.admin),handleGetAllUser)
 // router.post(
 //   '/create-faculty',
 //   validateRequest(createFacultyValidationSchema),

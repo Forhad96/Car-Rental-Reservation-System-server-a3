@@ -17,26 +17,28 @@ const createUser = async (payload: TUser) => {
 };
 
 const userSingIn = async (payload: TUser) => {
-  const isExistsUser = await UserModel.findOne({ email: payload.email });
-  if (!isExistsUser) {
+  const user = await UserModel.findOne({ email: payload.email }).lean();
+  if (!user) {
     throw new AppError(httpStatus.NOT_FOUND, "User doesn't exist");
   }
 
-  const isPasswordMatched = bcrypt.compare(payload.password,isExistsUser.password)
+  const isPasswordMatched = bcrypt.compare(payload.password,user.password)
     if (!isPasswordMatched) {
     throw new AppError(httpStatus.FORBIDDEN, "Password incorrect, please give correct password");
   }
 
   const jwtPayload = {
-    userId: isExistsUser?.email,
-    role:isExistsUser?.role,
+    userId: user?.email,
+    role:user?.role,
   };
 
   const accessToken = jwt.sign(jwtPayload,config.jwt_access_secret as string,{ expiresIn: '1h' },
   );
 
 
-  return {accessToken};
+  return {
+    user,
+    token:accessToken};
 };
 
 const getAllUsers = async () => {
