@@ -14,7 +14,7 @@
 
 
 ### Car bookings 
-- [] **book a car (only accessible to the user)**
+- [X] **book a car (only accessible to the user)**
 - [] **get all bookings (accessible to the admin)**
 - [] **Fix**
 - [] **Fix**

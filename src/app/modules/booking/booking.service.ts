@@ -34,7 +34,7 @@ const createBooking = async (userId: string, payload: TBooking) => {
       user: userId,
       car: payload.car,
     }).session(session);
-    
+
     if (existingBooking) {
       throw new AppError(
         httpStatus.CONFLICT,
@@ -65,9 +65,9 @@ const createBooking = async (userId: string, payload: TBooking) => {
   }
 };
 
-const getAllBookings = ()=>{
-  const result = BookingModel.find().populate('user').populate('car')
-  return result
-}
+const getAllBookings = () => {
+  const result = BookingModel.find().populate('user').populate('car');
+  return result;
+};
 
-export { createBooking ,getAllBookings};
+export { createBooking, getAllBookings };

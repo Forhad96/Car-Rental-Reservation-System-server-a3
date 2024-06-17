@@ -16,10 +16,7 @@ const handleCreateBooking = catchAsync(async (req, res) => {
   });
 });
 const handleGetAllBookings = catchAsync(async (req, res) => {
-  console.log('get');
-
   const result = await getAllBookings();
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
