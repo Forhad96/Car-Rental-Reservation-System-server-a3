@@ -28,7 +28,9 @@ const userSingIn = async (payload: TUser) => {
   }
 
   const jwtPayload = {
-    userId: user?.email,
+
+    userId: user._id,
+    userEmail:user.email,
     role:user?.role,
   };
 

@@ -10,5 +10,11 @@
 - [X] **Crate car (Only Admin can create)**
 - [X] **Get all cars**
 - [X] **Update A Car (Only Accessible to the Admin)**
-- [] **Delete A Car (Only Accessible to the Admin)**
+- [X] **Delete A Car (Only Accessible to the Admin)**
+
+
+### Car bookings 
+- [] **book a car (only accessible to the user)**
+- [] **get all bookings (accessible to the admin)**
+- [] **Fix**
 - [] **Fix**
