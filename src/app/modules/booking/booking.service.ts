@@ -70,4 +70,15 @@ const getAllBookings = () => {
   return result;
 };
 
-export { createBooking, getAllBookings };
+const getUserBooking = async (userId: string) => {
+  const userBookings = await BookingModel.find({ user: userId })
+    .populate('user')
+    .populate('car');
+if(!userBookings.length){
+       throw new AppError(httpStatus.NOT_FOUND, "Booking Doesn't exists");
+}
+
+  return userBookings;
+};
+
+export { createBooking, getAllBookings, getUserBooking };

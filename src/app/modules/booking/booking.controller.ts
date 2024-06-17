@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createBooking, getAllBookings } from './booking.service';
+import { createBooking, getAllBookings, getUserBooking } from './booking.service';
 
 const handleCreateBooking = catchAsync(async (req, res) => {
   const { userId } = req.user;
@@ -24,5 +24,14 @@ const handleGetAllBookings = catchAsync(async (req, res) => {
     data: result,
   });
 });
-
-export { handleCreateBooking, handleGetAllBookings };
+const handleGetUserBookings = catchAsync(async (req, res) => {
+  const { userId } = req.user;
+  const result = await getUserBooking(userId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'My Bookings retrieved successfully',
+    data: result,
+  });
+});
+export { handleCreateBooking, handleGetAllBookings,handleGetUserBookings };
