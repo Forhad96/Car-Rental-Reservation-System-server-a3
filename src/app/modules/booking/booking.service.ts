@@ -28,7 +28,6 @@ const createBooking = async (userId: string, payload: TBooking) => {
         `Car with ID ${payload.car} not found`,
       );
     }
-
     // Check for existing booking
     const existingBooking = await BookingModel.findOne({
       user: userId,
@@ -41,7 +40,9 @@ const createBooking = async (userId: string, payload: TBooking) => {
         `Booking already exists for user ID ${userId} and car ID ${payload.car}`,
       );
     }
-
+    // Update car status to "unavailable"
+    car.status = 'unavailable';
+    await car.save({ session });
     // Assign user ID to payload
     payload.user = user._id;
 
