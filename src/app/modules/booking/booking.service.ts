@@ -66,8 +66,9 @@ const createBooking = async (userId: string, payload: TBooking) => {
   }
 };
 
-const getAllBookings = () => {
-  const result = BookingModel.find().populate('user').populate('car');
+const getAllBookings = async() => {
+  const result =await  BookingModel.find().populate('user').populate('car');
+
   return result;
 };
 

@@ -12,19 +12,19 @@ const auth = (...requiredRoles:TUserRoles[]) => {
     const token = req.headers.authorization;
     // console.log(token);
     if (!token) {
-      throw new AppError(httpStatus.NOT_FOUND, 'You are not authorized!');
+      throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route');
     }
 
     // verify token valid or not
     jwt.verify(token, config.jwt_access_secret as string, function (err, decoded) {
       // err
       if (err) {
-        throw new AppError(httpStatus.NOT_FOUND, 'You are not authorized!');
+        throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route');
       }
 
       const role = (decoded as JwtPayload).role
       if(requiredRoles && !requiredRoles.includes(role)){
-        throw new AppError(httpStatus.NOT_FOUND, 'You are not authorized!');
+        throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route');
       }
 
       // decoded undefined

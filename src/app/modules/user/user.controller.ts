@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createUser, getAllUsers, userSingIn } from './user.service';
+import { createUser, getAllUsers, getSingleUser, userSingIn } from './user.service';
 
 const handleCreateUser = catchAsync(async (req, res) => {
   const result = await createUser(req.body);
@@ -34,6 +34,16 @@ const handleGetAllUser = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const handleGetSingleUser = catchAsync(async (req, res) => {
+const {userId} = req.params
+  const result = await getSingleUser(userId)
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users is retrieve successfully',
+    data: result,
+  });
+});
 
 
 
@@ -45,31 +55,4 @@ const handleGetAllUser = catchAsync(async (req, res) => {
 
 
 
-
-// const createFaculty = catchAsync(async (req, res) => {
-//   const { password, faculty: facultyData } = req.body;
-
-//   const result = await UserServices.createFacultyIntoDB(password, facultyData);
-
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Faculty is created succesfully',
-//     data: result,
-//   });
-// });
-
-// const createAdmin = catchAsync(async (req, res) => {
-//   const { password, admin: adminData } = req.body;
-
-//   const result = await UserServices.createAdminIntoDB(password, adminData);
-
-//   sendResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Admin is created succesfully',
-//     data: result,
-//   });
-// });
-
-export { handleCreateUser, handleSingInUser, handleGetAllUser };
+export { handleCreateUser, handleSingInUser, handleGetAllUser,handleGetSingleUser };

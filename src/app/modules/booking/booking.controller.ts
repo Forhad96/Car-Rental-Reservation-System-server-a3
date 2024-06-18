@@ -1,7 +1,11 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createBooking, getAllBookings, getUserBooking } from './booking.service';
+import {
+  createBooking,
+  getAllBookings,
+  getUserBooking,
+} from './booking.service';
 
 const handleCreateBooking = catchAsync(async (req, res) => {
   const { userId } = req.user;
@@ -17,6 +21,15 @@ const handleCreateBooking = catchAsync(async (req, res) => {
 });
 const handleGetAllBookings = catchAsync(async (req, res) => {
   const result = await getAllBookings();
+
+  // if (!result.length) {
+  //   sendResponse(res, {
+  //     statusCode: httpStatus.NOT_FOUND,
+  //     success: false,
+  //     message: 'No Data Found',
+  //     data: result,
+  //   });
+  // }
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -34,4 +47,4 @@ const handleGetUserBookings = catchAsync(async (req, res) => {
     data: result,
   });
 });
-export { handleCreateBooking, handleGetAllBookings,handleGetUserBookings };
+export { handleCreateBooking, handleGetAllBookings, handleGetUserBookings };

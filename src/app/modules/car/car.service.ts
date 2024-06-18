@@ -52,7 +52,8 @@ const returnCar = async (payload: TReturnCar): Promise<TBooking> => {
   // Find the booking and populate the user and car details
   const booking = await BookingModel.findById(bookingId)
     .populate('user')
-    .populate('car').exec();
+    .populate('car')
+    .exec();
 
   // Check if the booking exists
   if (!booking) {

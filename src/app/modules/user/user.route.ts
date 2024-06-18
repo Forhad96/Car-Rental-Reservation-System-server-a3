@@ -3,6 +3,7 @@ import validateRequest from '../../middlewares/validateRequest';
 import {
   handleCreateUser,
   handleGetAllUser,
+  handleGetSingleUser,
   handleSingInUser,
 } from './user.controller';
 import { zLoginSchema, zUserSchema } from './user.validation';
@@ -15,16 +16,7 @@ router.post('/signup', validateRequest(zUserSchema), handleCreateUser);
 router.post('/signin', validateRequest(zLoginSchema), handleSingInUser);
 
 router.get('/', handleGetAllUser);
-// router.post(
-//   '/create-faculty',
-//   validateRequest(createFacultyValidationSchema),
-//   UserControllers.createFaculty,
-// );
 
-// router.post(
-//   '/create-admin',
-//   validateRequest(createAdminValidationSchema),
-//   UserControllers.createAdmin,
-// );
+router.get('/:userId',handleGetSingleUser)
 
 export const UserRoutes = router;
