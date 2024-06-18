@@ -1,28 +1,9 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createUser, getAllUsers, getSingleUser, userSingIn } from './user.service';
+import {  getAllUsers, getSingleUser } from './user.service';
 
-const handleCreateUser = catchAsync(async (req, res) => {
-  const result = await createUser(req.body);
 
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'User is created successfully',
-    data: result,
-  });
-});
-const handleSingInUser = catchAsync(async (req, res) => {
-  const result = await userSingIn(req.body);
-
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'User logged in successfully',
-    data: result,
-  });
-});
 const handleGetAllUser = catchAsync(async (req, res) => {
   console.log(req.user);
   const result = await getAllUsers();
@@ -55,4 +36,4 @@ const {userId} = req.params
 
 
 
-export { handleCreateUser, handleSingInUser, handleGetAllUser,handleGetSingleUser };
+export {  handleGetAllUser,handleGetSingleUser };

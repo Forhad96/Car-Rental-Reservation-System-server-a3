@@ -15,6 +15,10 @@ const getAllCars = async () => {
   const result = await CarModel.find();
   return result;
 };
+const getSingleCar = async (id:string)  => {
+  const result = await CarModel.findById(id);
+  return result;
+};
 
 const updateSingleCar = async (carId: string, payload: TCar) => {
   // check id valid or or not
@@ -84,4 +88,4 @@ const returnCar = async (payload: TReturnCar): Promise<TBooking> => {
 
   return booking;
 };
-export { createCar, getAllCars, updateSingleCar, deleteSingleCar, returnCar };
+export { createCar, getAllCars,getSingleCar, updateSingleCar, deleteSingleCar, returnCar };

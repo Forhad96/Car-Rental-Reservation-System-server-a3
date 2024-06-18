@@ -25,7 +25,7 @@ const sendResponse = <T>(res: Response, data: TResponse<T>) => {
     // Set status code to 404 and send a "Not Found" response
     res.status(404).json({
       success: false,
-      message: 'Data not found',
+      message: 'No Data Found',
       data: data.data,
     });
   } else {
