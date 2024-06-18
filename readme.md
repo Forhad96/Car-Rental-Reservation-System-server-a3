@@ -1,27 +1,101 @@
-# Requirement Analysis and Entity-Relationship (ER) Diagram
+# Car Renting System Backend
 
-## Requirement Analysis
+## Overview
+This project is the backend implementation for a Car Renting System. It focuses on error handling, CRUD operations, authentication, authorization, and transaction management.
 
-([Requirement Analysis - 👈 Click Here](https://docs.google.com/document/d/10mkjS8boCQzW4xpsESyzwCCLJcM3hvLghyD_TeXPBx0/edit?usp=sharing))
+## Features
+- **Error Handling**: Global error handling middleware to catch and handle exceptions.
+- **CRUD Operations**: Manage car entries and bookings with create, read, update, and delete operations.
+- **Authentication & Authorization**: Secure routes with JWT-based authentication and role-based access control.
+- **Transaction Management**: Handle transactions with rollback capabilities if necessary.
 
-*Description*: This document represents the requirement analysis of part-1.
+## Models
+The database is designed with the following models:
+- Car
+- User
+- Booking
 
-## Entity-Relationship (ER) Diagram
+## Admin Actions
+- **Car Management**: Create, update, and soft delete car entries.
+- **Booking Oversight**: View all ongoing and past bookings.
+- **Ride Cost Calculation**: Calculate total cost for completed rentals.
 
-![UPDATED ER DIAGRAM](./Final.png)
+## User Actions
+- **Book a Ride**: Book cars by specifying `carId` and `startTime`.
+- **Rental History**: Access past booking records.
 
-Description: This is an updated diagram illustrates the relationships among User, Student, Admin, Faculty, Academic Semester, Academic Faculty, Academic Department.
+## API Endpoints
+### Authentication
+- POST `/api/auth/signup` - Register a new user or admin.
+- POST `/api/auth/signin` - Login for users and admins.
 
----
+### Car Management
+- POST `/api/cars` - Create a new car entry.
+- GET `/api/cars` - Retrieve all cars.
+- GET `/api/cars/:carId` - Retrieve a single car.
+- PUT `/api/cars/:carId` - Update a car entry.
+- DELETE `/api/cars/:carId` - Soft delete a car entry.
 
-![POSTMAN COLLECTION](./postman_collection.json)
+### Booking Management
+- GET `/api/bookings` - Retrieve all bookings.
+- POST `/api/bookings` - Create a new booking.
+- GET `/api/bookings/my-bookings` - Retrieve user's bookings.
+- PUT `/api/cars/return` - Update booking with `endTime` and calculate cost.
 
-Description: This is a postman collection of all the API endpoints.Download this , and import it in your postman if you needed.
+## Error Responses
+Proper error responses with status codes and messages for various exceptions.
 
----
+## Not Found Handler
+A global handler for unmatched routes with a generic "Not Found" message.
 
-### Uploading the Collection to Your Postman (If needed)
+## Authentication Middleware
+Middleware to authenticate routes and ensure proper access control.
 
-1. Download the Postman collection (.json file) from the provided source.
-2. Open Postman and click on "Import" (located in the upper-left corner).
-3. Choose the downloaded file and confirm the import.
+## Validation
+Input validation using Zod to ensure data consistency.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or later)
+- MongoDB (local or cloud instance)
+
+### Installation
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Forhad96/Car-Rental-Reservation-System-server-a3.git
+    cd Car-Rental-Reservation-System-server-a3.git
+    ```
+
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+3. Set up environment variables:
+    Create a `.env` file in the root directory and add the following variables:
+    ```env
+    PORT=3000
+    MONGODB_URI=mongodb://localhost:27017/car-renting-system
+    JWT_SECRET=your_jwt_secret
+    BCRYPT_SALT_ROUNDS=10
+    ```
+
+### Running the Application
+
+1. Start the MongoDB server (if not already running):
+    ```sh
+    mongod
+    ```
+
+2. Start the application:
+    ```sh
+    npm start
+    ```
+
+3. The server will start on `http://localhost:3000`.
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
