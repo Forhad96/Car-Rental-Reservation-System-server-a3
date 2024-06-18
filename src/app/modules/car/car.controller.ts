@@ -1,7 +1,7 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { createCar, deleteSingleCar, getAllCars, updateSingleCar } from './car.service';
+import { createCar, deleteSingleCar, getAllCars, returnCar,  updateSingleCar } from './car.service';
 
 const handleCreateCar = catchAsync(async (req, res) => {
   const result = await createCar(req.body);
@@ -53,6 +53,22 @@ const handleDeleteSingleCar = catchAsync(async (req,res)=>{
       });
 })
 
+const handleReturnCar = catchAsync(async (req,res)=>{
+  const result = await returnCar(req.body)
+
+      sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: 'Car returned successfully',
+        data: result,
+      });
+})
 
 
-export { handleCreateCar,handleGetAllCars,handleUpdateSingleCar,handleDeleteSingleCar };
+export {
+  handleCreateCar,
+  handleGetAllCars,
+  handleUpdateSingleCar,
+  handleDeleteSingleCar,
+  handleReturnCar,
+};

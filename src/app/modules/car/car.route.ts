@@ -3,7 +3,7 @@ import validateRequest from '../../middlewares/validateRequest';
 import auth from '../../middlewares/auth';
 import { USER_ROLES } from '../user/user.constant';
 import { zCarSchema, zCarUpdateSchema } from './car.validation';
-import { handleCreateCar, handleDeleteSingleCar, handleGetAllCars, handleUpdateSingleCar } from './car.controller';
+import { handleCreateCar, handleDeleteSingleCar, handleGetAllCars, handleReturnCar, handleUpdateSingleCar } from './car.controller';
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ router.post(
   validateRequest(zCarSchema),
   handleCreateCar,
 );
-router.patch(
+router.put(
   '/:carId',
   auth(USER_ROLES.admin),
     validateRequest(zCarUpdateSchema),
@@ -25,6 +25,9 @@ router.delete(
   handleDeleteSingleCar,
 );
 router.get('/', handleGetAllCars);
+
+
+router.patch('/return',auth(USER_ROLES.admin),handleReturnCar);
 // router.post('/signin', validateRequest(zLoginSchema), handleSingInUser);
 
 // router.get('/', auth(USER_ROLES.admin), handleGetAllUser);
