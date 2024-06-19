@@ -1,13 +1,23 @@
 # Car Renting System Backend
 
+## Live server
+
+https://car-rental-backend-eta.vercel.app
+
 ## Overview
 This project is the backend implementation for a Car Renting System. It focuses on error handling, CRUD operations, authentication, authorization, and transaction management.
+
 
 ## Features
 - **Error Handling**: Global error handling middleware to catch and handle exceptions.
 - **CRUD Operations**: Manage car entries and bookings with create, read, update, and delete operations.
 - **Authentication & Authorization**: Secure routes with JWT-based authentication and role-based access control.
 - **Transaction Management**: Handle transactions with rollback capabilities if necessary.
+
+## Tech Stack
+
+**Server:** Node, Express,mongoose,typescript,dotenv,bycript
+
 
 ## Models
 The database is designed with the following models:
@@ -73,7 +83,7 @@ Input validation using Zod to ensure data consistency.
     ```sh
     npm install
     ```
-
+### Environment Variables
 3. Set up environment variables:
     Create a `.env` file in the root directory and add the following variables:
     ```env
@@ -85,14 +95,16 @@ Input validation using Zod to ensure data consistency.
 
 ### Running the Application
 
-1. Start the MongoDB server (if not already running):
+1. Install necessary packages (if not already install):
     ```sh
-    mongod
+    npm install 
     ```
 
 2. Start the application:
     ```sh
     npm start
+    or
+    npm run dev
     ```
 
 3. The server will start on `http://localhost:3000`.

@@ -12,10 +12,13 @@ const app: Application = express();
 
 //parsers
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
 
 // application routes
 app.use('/api', router);
+app.use('/',(req,res)=>{
+    res.send('Car-Rental-Reservation-System-server is Running');
+})
 
 app.use(globalErrorHandler);
 
