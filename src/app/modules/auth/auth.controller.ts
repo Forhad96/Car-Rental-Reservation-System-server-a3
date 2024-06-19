@@ -1,12 +1,11 @@
 import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import { userSignUp, userSingIn } from "./auth.service";
+import { userSignUp, userSignIn } from "./auth.service";
 
 
 const handleUserSignUp = catchAsync(async (req, res) => {
   const result = await userSignUp(req.body);
-
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -15,7 +14,7 @@ const handleUserSignUp = catchAsync(async (req, res) => {
   });
 });
 const handleUserSignIn = catchAsync(async (req, res) => {
-  const result = await userSingIn(req.body);
+  const result = await userSignIn(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
