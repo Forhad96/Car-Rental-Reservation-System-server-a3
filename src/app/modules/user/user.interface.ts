@@ -6,7 +6,7 @@ export interface TUser {
   role: 'user' | 'admin';
   password: string;
   phone: string;
-  address: string;
+  address?: string;
 }
 
 export type TUserRoles = keyof typeof USER_ROLES;

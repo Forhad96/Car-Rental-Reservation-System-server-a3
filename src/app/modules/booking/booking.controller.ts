@@ -8,10 +8,11 @@ import {
 } from './booking.service';
 
 const handleCreateBooking = catchAsync(async (req, res) => {
-  const { userId } = req.user;
+  const { email } = req.user;
+
   const bookingData = req.body;
 
-  const result = await createBooking(userId, bookingData);
+  const result = await createBooking(email, bookingData);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -39,6 +40,7 @@ const handleGetAllBookings = catchAsync(async (req, res) => {
 });
 const handleGetUserBookings = catchAsync(async (req, res) => {
   const { userId } = req.user;
+  console.log(userId);
   const result = await getUserBooking(userId);
   sendResponse(res, {
     statusCode: httpStatus.OK,

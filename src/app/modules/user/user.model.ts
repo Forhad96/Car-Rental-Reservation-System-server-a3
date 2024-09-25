@@ -20,7 +20,8 @@ const userSchema = new Schema<TUser>(
     role: {
       type: String,
       enum: ['user', 'admin'],
-      required: true,
+      default:"user",
+      required: false,
     },
     password: {
       type: String,
@@ -33,7 +34,7 @@ const userSchema = new Schema<TUser>(
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
   },
   {

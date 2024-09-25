@@ -5,7 +5,6 @@ import {  getAllUsers, getSingleUser } from './user.service';
 
 
 const handleGetAllUser = catchAsync(async (req, res) => {
-  console.log(req.user);
   const result = await getAllUsers();
 
   sendResponse(res, {

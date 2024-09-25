@@ -9,7 +9,7 @@ import { TUserRoles } from '../modules/user/user.interface';
 
 const auth = (...requiredRoles:TUserRoles[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization?.replace('Bearer ', '')
     // console.log(token);
     if (!token) {
       throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route');
@@ -17,6 +17,7 @@ const auth = (...requiredRoles:TUserRoles[]) => {
 
     // verify token valid or not
     jwt.verify(token, config.jwt_access_secret as string, function (err, decoded) {
+      // console.log(decoded);
       // err
       if (err) {
         throw new AppError(httpStatus.NOT_FOUND, 'You have no access to this route');

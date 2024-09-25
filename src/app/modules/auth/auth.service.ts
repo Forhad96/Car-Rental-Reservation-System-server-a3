@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import AppError from '../../errors/AppError';
 import config from '../../config';
 import { startSession } from 'mongoose';
+import { createToken } from './auth.utils';
 const userSignUp = async (payload: TUser) => {
   const isExistsUser = await UserModel.findOne({ email: payload?.email });
   if (isExistsUser) {
@@ -38,25 +39,37 @@ const userSignIn = async (payload: TUser) => {
     }
 
     const jwtPayload = {
-      userId: user._id,
-      userEmail: user.email,
-      role: user.role,
+      userId: user?._id,
+      email: user?.email,
+      role: user?.role,
     };
 
-    const accessToken = jwt.sign(
+    // const accessToken = jwt.sign(
+    //   jwtPayload,
+    //   config.jwt_access_secret as string,
+    //   {
+    //     expiresIn: config.jwt_access_expired_in,
+    //   },
+    // );
+
+    const accessToken = createToken(
       jwtPayload,
       config.jwt_access_secret as string,
-      {
-        expiresIn: config.jwt_access_expired_in,
-      },
+      config.jwt_access_expired_in as string,
+    );
+
+    const refreshToken = createToken(
+      jwtPayload,
+      config.jwt_refresh_secret as string,
+      config.jwt_refresh_expired_in as string,
     );
 
     await session.commitTransaction();
     session.endSession();
 
     return {
-      user,
-      token: accessToken,
+      accessToken,
+      refreshToken,
     };
   } catch (error) {
     await session.abortTransaction();

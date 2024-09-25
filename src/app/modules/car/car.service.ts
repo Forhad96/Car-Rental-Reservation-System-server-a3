@@ -6,16 +6,31 @@ import httpStatus from 'http-status';
 import { BookingModel } from '../booking/booking.model';
 import { TBooking } from '../booking/booking.interface';
 import { calculateTotalCost } from './car.utils';
+import { carSearchableFields } from './car.constant';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createCar = async (payload: TCar) => {
+  console.log(payload);
   const result = await CarModel.create(payload);
   return result;
 };
-const getAllCars = async () => {
-  const result = await CarModel.find();
-  return result;
+
+const getAllCars = async (query: Record<string, unknown>) => {
+
+  const carQuery = new QueryBuilder(CarModel.find(), query)
+  .search(carSearchableFields)
+  .filter()
+  .sort()
+  .paginate()
+  .fields();
+  const meta = await carQuery.countTotal();
+  const result = await carQuery.modelQuery;
+
+  return {
+    meta,result
+  }
 };
-const getSingleCar = async (id:string)  => {
+const getSingleCar = async (id: string) => {
   const result = await CarModel.findById(id);
   return result;
 };
@@ -88,4 +103,11 @@ const returnCar = async (payload: TReturnCar): Promise<TBooking> => {
 
   return booking;
 };
-export { createCar, getAllCars,getSingleCar, updateSingleCar, deleteSingleCar, returnCar };
+export {
+  createCar,
+  getAllCars,
+  getSingleCar,
+  updateSingleCar,
+  deleteSingleCar,
+  returnCar,
+};

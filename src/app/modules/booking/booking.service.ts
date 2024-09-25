@@ -6,20 +6,19 @@ import { BookingModel } from './booking.model';
 import CarModel from '../car/car.model';
 import { startSession } from 'mongoose';
 
-const createBooking = async (userId: string, payload: TBooking) => {
+const createBooking = async (userEmail: string, payload: TBooking) => {
   const session = await startSession();
   session.startTransaction();
 
   try {
     // Find user by ID
-    const user = await UserModel.findById(userId).session(session);
+    const user = await UserModel.findOne({email:userEmail}).session(session);
     if (!user) {
       throw new AppError(
         httpStatus.NOT_FOUND,
-        `User with ID ${userId} not found`,
+        `User with ID ${userEmail} not found`,
       );
     }
-
     // Find car by ID
     const car = await CarModel.findById(payload.car).session(session);
     if (!car) {
@@ -30,14 +29,14 @@ const createBooking = async (userId: string, payload: TBooking) => {
     }
     // Check for existing booking
     const existingBooking = await BookingModel.findOne({
-      user: userId,
+      user: user._id,
       car: payload.car,
     }).session(session);
-
     if (existingBooking) {
+      
       throw new AppError(
         httpStatus.CONFLICT,
-        `Booking already exists for user ID ${userId} and car ID ${payload.car}`,
+        `Booking already exists for user ID ${userEmail} and car ID ${payload.car}`,
       );
     }
     // Update car status to "unavailable"
