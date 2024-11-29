@@ -1,14 +1,14 @@
-import { Router } from "express";
-import validateRequest from "../../middlewares/validateRequest";
-import { zSignInSchema, zSignUpSchema } from "./auth.validation";
-import { handleUserSignIn,} from "./auth.controller";
+import { Router } from 'express';
+import validateRequest from '../../middlewares/validateRequest';
+import { AuthValidationSchemas } from './auth.validation';
+import { AuthControllers } from './auth.controller';
 
-const router = Router()
+const router = Router();
 
+router.post(
+  '/login',
+  validateRequest(AuthValidationSchemas.zSignInSchema),
+  AuthControllers.loginUser,
+);
 
-
-router.post('/signin', validateRequest(zSignInSchema), handleUserSignIn);
-
-
-
-export const AuthRoutes = router
+export const AuthRoutes = router;

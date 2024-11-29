@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { zSignUpSchema } from '../auth/auth.validation';
+
 
 
 
@@ -24,7 +24,7 @@ const zCreateUserSchema = z.object({
 
 // User registration schema
 const zUserUpdateSchema = z.object({
-  body: zSignUpSchema.shape.body.partial(),
+  body: zCreateUserSchema.shape.body.partial(),
 });
 
 export const UserValidationSchemas ={zCreateUserSchema, zUserUpdateSchema };

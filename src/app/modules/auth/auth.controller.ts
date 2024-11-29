@@ -1,12 +1,13 @@
 import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
-import {  userSignIn } from "./auth.service";
+import { AuthServices } from "./auth.service";
 
 
 
-const handleUserSignIn = catchAsync(async (req, res) => {
-  const result = await userSignIn(req.body);
+
+const loginUser = catchAsync(async (req, res) => {
+  const result = await AuthServices.loginUser(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -16,4 +17,4 @@ const handleUserSignIn = catchAsync(async (req, res) => {
   });
 });
 
-export {handleUserSignIn}
+export const AuthControllers= {loginUser}

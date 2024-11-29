@@ -24,4 +24,4 @@ const zSignInSchema = z.object({
   }),
 });
 
-export { zSignUpSchema, zSignInSchema };
+export const AuthValidationSchemas = { zSignUpSchema, zSignInSchema };

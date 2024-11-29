@@ -8,7 +8,7 @@ import config from '../../config';
 import { startSession } from 'mongoose';
 import { createToken } from './auth.utils';
 
-const userSignIn = async (payload: TUser) => {
+const loginUser = async (payload: TUser) => {
   const { email, password } = payload;
 
   const session = await startSession();
@@ -69,4 +69,4 @@ const userSignIn = async (payload: TUser) => {
     throw error;
   }
 };
-export {  userSignIn };
+export const AuthServices= {  loginUser };
