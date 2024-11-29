@@ -6,16 +6,21 @@ export type TCar = {
   year: number;
   color: string;
   isElectric: boolean;
-  carType: 'sedan' | 'SUV' | 'truck' | 'van' | 'coupe' | 'electric'; // Enum for car type
+  carType: 'sedan' | 'SUV' | 'truck' | 'van' | 'coupe' | 'electric';
+  door?: number;
+  passengers?: number;
+  transmission?: string;
+  luggage?: number;
+  airCondition?: boolean;
   seats: number;
-  mileage: number;
-  status: 'available' | 'unavailable'; // Enum for car status
+  mileage?: number;
+  status: 'available' | 'unavailable';
   location: string;
   features: string[];
   pricePerHour: number;
-  pricePerDay?: number; // Optional field
-  imageUrl?: string[]; // Optional field
-  isDeleted: boolean;
+  pricePerDay?: number;
+  imageUrl?: string[];
+  isDeleted?: boolean;
 };
 export type TReturnCar = {
   bookingId: string;

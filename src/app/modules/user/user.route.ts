@@ -1,15 +1,17 @@
 import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
-import {
-  handleGetAllUser,
-  handleGetSingleUser,
-} from './user.controller';
+import { UserControllers } from './user.controller';
+import { UserValidationSchemas } from './user.validation';
+
 const router = express.Router();
 
+router.post(
+  '/create-user',
+  validateRequest(UserValidationSchemas.zCreateUserSchema),
+  UserControllers.createUser,
+);
+router.get('/', UserControllers.getAllUser);
 
-
-router.get('/', handleGetAllUser);
-
-router.get('/:userId',handleGetSingleUser)
+router.get('/:userId', UserControllers.getSingleUser);
 
 export const UserRoutes = router;

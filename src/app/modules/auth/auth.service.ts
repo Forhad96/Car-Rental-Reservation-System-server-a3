@@ -7,14 +7,6 @@ import AppError from '../../errors/AppError';
 import config from '../../config';
 import { startSession } from 'mongoose';
 import { createToken } from './auth.utils';
-const userSignUp = async (payload: TUser) => {
-  const isExistsUser = await UserModel.findOne({ email: payload?.email });
-  if (isExistsUser) {
-    throw new AppError(httpStatus.NOT_FOUND, 'User already exist');
-  }
-  const result = await UserModel.create(payload);
-  return result;
-};
 
 const userSignIn = async (payload: TUser) => {
   const { email, password } = payload;
@@ -77,4 +69,4 @@ const userSignIn = async (payload: TUser) => {
     throw error;
   }
 };
-export { userSignUp, userSignIn };
+export {  userSignIn };

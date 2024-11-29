@@ -1,11 +1,20 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import {  getAllUsers, getSingleUser } from './user.service';
+import { UserServices } from './user.service';
 
 
-const handleGetAllUser = catchAsync(async (req, res) => {
-  const result = await getAllUsers();
+const createUser = catchAsync(async (req, res) => {
+  const result = await UserServices.createUser(req.body);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User is created successfully',
+    data: result,
+  });
+});
+const getAllUser = catchAsync(async (req, res) => {
+  const result = await UserServices.getAllUsers();
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -14,9 +23,9 @@ const handleGetAllUser = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const handleGetSingleUser = catchAsync(async (req, res) => {
+const getSingleUser = catchAsync(async (req, res) => {
 const {userId} = req.params
-  const result = await getSingleUser(userId)
+  const result = await UserServices.getSingleUser(userId)
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -26,13 +35,4 @@ const {userId} = req.params
 });
 
 
-
-
-
-
-
-
-
-
-
-export {  handleGetAllUser,handleGetSingleUser };
+export const UserControllers =  {  createUser,getAllUser,getSingleUser };
